@@ -1,6 +1,8 @@
+package BigONotation;
+
 import java.util.Arrays;
 
-public class Big_O_Notation {
+public class TimeComplexity {
 
     public static void main(String[] args) {
         constantTime();       // O(1)
@@ -61,7 +63,7 @@ public class Big_O_Notation {
         System.out.println(fibonacci(5)); // Slow for large n
     }
 
-    private static int fibonacci(int n) {
+    public static int fibonacci(int n) {
         if (n <= 1) return n;
         return fibonacci(n - 1) + fibonacci(n - 2);  // Recursive calls lead to O(2^n)
     }
