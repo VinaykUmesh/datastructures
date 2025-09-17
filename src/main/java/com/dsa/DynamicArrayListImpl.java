@@ -1,6 +1,7 @@
 package com.dsa;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -12,7 +13,7 @@ public class DynamicArrayListImpl {
     public static void main(String[] args) {
         int value, position;
         Scanner scanner = new Scanner(System.in);
-        DynamicArray dynamicArray = new DynamicArray();
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
         while(true) {
             System.out.println("\n -------------- List Menu -------------- \n");
             System.out.println("1.  Insert element at the end");
@@ -39,6 +40,7 @@ public class DynamicArrayListImpl {
                     break;
                 case 2:
                     dynamicArray.display();
+                    dynamicArray.forEach(System.out::println);
                     break;
                 case 3:
                     System.out.println("Enter the position(default: 0): ");
@@ -104,20 +106,21 @@ public class DynamicArrayListImpl {
 
 }
 
-class DynamicArray {
+class DynamicArray <T>  implements Iterable<T>{
     public static final int initialCapacity = 16;
-    private int[] arr;
+    private T [] arr;
     private int size;
     private int capacity;
 
+    @SuppressWarnings("unchecked")
     public DynamicArray() {
         size = 0;
-        arr = new int[initialCapacity];
+        arr = (T[]) new Object[initialCapacity];
         capacity = initialCapacity;
     }
 
 
-    public void add(int value) {
+    public void add(T value) {
         if(size == capacity) expandArray();
         arr[size++] = value;
         display();
@@ -133,7 +136,7 @@ class DynamicArray {
         for (int i = 0; i < size; i++) System.out.print(arr[i] + " ");
     }
 
-    public void insertAtPosition(int value, int position) {
+    public void insertAtPosition(T value, int position) {
         // 3 4 5 678 5
         // 0 1 2 3   4
         if (size == capacity) expandArray();
@@ -167,7 +170,7 @@ class DynamicArray {
         }
     }
 
-    public void update(int value, int position) {
+    public void update(T value, int position) {
         if (position < size) {
             arr[position] = value;
         } else {
@@ -176,7 +179,7 @@ class DynamicArray {
         display();
     }
 
-    public String search(int value) {
+    public String search(T value) {
         String message = "Element not found";
         for (int i = 0; i < size; i++)
             if (arr[i] == value) {
@@ -186,13 +189,14 @@ class DynamicArray {
         return message;
     }
 
+    @SuppressWarnings("unchecked")
     public void clear() {
         size = 0;
-        arr = new int[initialCapacity];
+        arr = (T[]) new Object[initialCapacity];
         capacity = initialCapacity;
     }
 
-    public boolean contains(int value) {
+    public boolean contains(T value) {
         boolean bool = false;
         for (int i = 0; i < size; i++) {
             if (arr[i] == value) {
@@ -201,6 +205,24 @@ class DynamicArray {
             }
         }
         return bool;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public T next() {
+                return arr[index++];
+            }
+        };
     }
 }
 
