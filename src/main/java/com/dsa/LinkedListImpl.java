@@ -1,12 +1,14 @@
 package com.dsa;
 
+import java.util.Iterator;
+
 /**
  * Singly Linked List Implementation.
  */
 public class LinkedListImpl {
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        LinkedList<Integer> list = new LinkedList<>();
         list.insertAtBegin(5);
         list.insertAtBegin(9);
         list.insertAtBegin(12);
@@ -46,17 +48,19 @@ public class LinkedListImpl {
         System.out.println("\nContains: " + list.contains(2573636));
 
         System.out.println("Length: " + list.length());
+
+        list.forEach(System.out::println);
     }
 }
 
-class LinkedList {
+class LinkedList<T> implements Iterable<T> {
     Node head;
 
-    static class Node {
-        int data;
+    class Node {
+        T data;
         Node next;
 
-        public Node(int value) {
+        public Node(T value) {
             data = value;
             next = null;
         }
@@ -66,7 +70,7 @@ class LinkedList {
         head = null;
     }
 
-    public void insertAtBegin(int value) {
+    public void insertAtBegin(T value) {
         Node node = new Node(value);
         if (head == null) {
             head = node;
@@ -84,7 +88,7 @@ class LinkedList {
         }
     }
 
-    public void insertAtPos(int position, int value) {
+    public void insertAtPos(int position, T value) {
         Node node = new Node(value);
 
         if (position == 0) {
@@ -142,7 +146,7 @@ class LinkedList {
         }
     }
 
-    public void update(int position, int value) {
+    public void update(int position, T value) {
         Node node = new Node(value);
         Node temp = head;
         if (position == 0) {
@@ -176,7 +180,7 @@ class LinkedList {
         temp.next = null;
     }
 
-    public void insertAtEnd(int value) {
+    public void insertAtEnd(T value) {
         Node node = new Node(value);
 
         if (head == null) {
@@ -191,7 +195,7 @@ class LinkedList {
         temp.next = node;
     }
 
-    public void search(int value) {
+    public void search(T value) {
         Node temp = head;
         if (head.data == value) {
             System.out.print("Search Found at index: 0");
@@ -208,7 +212,7 @@ class LinkedList {
         System.out.print("Search Found at index: " + index);
     }
 
-    public boolean contains(int value) {
+    public boolean contains(T value) {
         Node temp = head;
         boolean index = false;
         if (head.data == value) {
@@ -241,6 +245,25 @@ class LinkedList {
             length = i;
         }
         return length;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            Node temp = head;
+
+            @Override
+            public boolean hasNext() {
+                return temp != null;
+            }
+
+            @Override
+            public T next() {
+                T data = temp.data;
+                temp = temp.next;
+                return data;
+            }
+        };
     }
 
 }
