@@ -50,6 +50,9 @@ public class LinkedListImpl {
         System.out.println("Length: " + list.length());
 
         list.forEach(System.out::println);
+
+        list.reverse();
+        list.display();
     }
 }
 
@@ -245,6 +248,26 @@ class LinkedList<T> implements Iterable<T> {
             length = i;
         }
         return length;
+    }
+
+    public void reverse(){
+        Node prev = null;
+        Node current = head;
+        Node next;
+
+        // 25 17 12 26 5
+        // 25
+        // 17 25
+        // 12 17 25
+        // 26 12 17 25
+        // 5 26 12 17 25
+        while (current != null) {
+            next = current.next;
+            current.next = prev; // reverse link
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
 
     @Override
