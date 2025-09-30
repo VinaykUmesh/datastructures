@@ -14,7 +14,7 @@ public class DynamicArrayListImpl {
         int value, position;
         Scanner scanner = new Scanner(System.in);
         DynamicArray<Integer> dynamicArray = new DynamicArray<>();
-        while(true) {
+        while (true) {
             System.out.println("\n -------------- List Menu -------------- \n");
             System.out.println("1.  Insert element at the end");
             System.out.println("2.  Display the list");
@@ -106,9 +106,9 @@ public class DynamicArrayListImpl {
 
 }
 
-class DynamicArray <T>  implements Iterable<T>{
+class DynamicArray<T> implements Iterable<T> {
     public static final int initialCapacity = 16;
-    private T [] arr;
+    private T[] arr;
     private int size;
     private int capacity;
 
@@ -121,7 +121,7 @@ class DynamicArray <T>  implements Iterable<T>{
 
 
     public void add(T value) {
-        if(size == capacity) expandArray();
+        if (size == capacity) expandArray();
         arr[size++] = value;
         display();
     }

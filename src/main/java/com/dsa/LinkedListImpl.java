@@ -205,7 +205,7 @@ class LinkedList<T> implements Iterable<T> {
             return;
         }
         int index = -1;
-        for (int i= 1; temp != null; i++) {
+        for (int i = 1; temp != null; i++) {
             temp = temp.next;
             if (temp != null && temp.data == value) {
                 index = i;
@@ -250,7 +250,7 @@ class LinkedList<T> implements Iterable<T> {
         return length;
     }
 
-    public void reverse(){
+    public void reverse() {
         Node prev = null;
         Node current = head;
         Node next;

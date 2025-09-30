@@ -1,14 +1,16 @@
+package com.dsa;
+
 import java.util.Arrays;
 
 public class Big_O_Notation {
 
     public static void main(String[] args) {
-        constantTime();       // O(1)
-        linearTime();         // O(n)
-        logarithmicTime();    // O(log n)
-        logLinearTime();      // O(n log n)
-        quadraticTime();      // O(n^2)
-        exponentialTime();    // O(n^2)
+        constantTime(); // O(1)
+        linearTime(); // O(n)
+        logarithmicTime(); // O(log n)
+        logLinearTime(); // O(n log n)
+        quadraticTime(); // O(n^2)
+        exponentialTime(); // O(n^2)
     }
 
     private static void constantTime() {
@@ -38,7 +40,7 @@ public class Big_O_Notation {
 
     private static void logLinearTime() {
         int[] arr = {2, 5, 6, 54, 667, 32};
-        Arrays.sort(arr);  // O(n log n)
+        Arrays.sort(arr); // O(n log n)
         System.out.println(Arrays.toString(arr));
     }
 
@@ -62,7 +64,8 @@ public class Big_O_Notation {
     }
 
     private static int fibonacci(int n) {
-        if (n <= 1) return n;
-        return fibonacci(n - 1) + fibonacci(n - 2);  // Recursive calls lead to O(2^n)
+        if (n <= 1)
+            return n;
+        return fibonacci(n - 1) + fibonacci(n - 2); // Recursive calls lead to O(2^n)
     }
 }
